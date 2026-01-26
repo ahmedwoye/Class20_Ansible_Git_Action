@@ -1,0 +1,19 @@
+name: Asible Deploy
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - ["main"]
+
+jobs:
+  run-ansible:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: listout
+        run: 
+          pwd
+          ls -lstr
