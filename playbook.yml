@@ -23,14 +23,16 @@
   gather_facts: true
 
   tasks:
-    - name: Install Java
+    - name: Install Java 17
       yum:
         name: java-17-amazon-corretto
         state: present
 
-    - name: Ensure Java service is running (if applicable)
-      service:
-        name: java
-        state: started
-        enabled: true
-      ignore_errors: true
+    - name: Verify Java installation
+      command: java -version
+      register: java_version
+      changed_when: false
+
+    - name: Show installed Java version
+      debug:
+        msg: "{{ java_version.stdout }}"
