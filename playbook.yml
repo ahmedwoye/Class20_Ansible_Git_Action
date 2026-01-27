@@ -17,7 +17,7 @@
         enabled: true
 
 
-- name: Java installation and configuration
+- name: Java and Maven installation and configuration
   hosts: app
   become: true
   gather_facts: true
@@ -28,6 +28,11 @@
         name: java-17-amazon-corretto
         state: present
 
+    - name: Install Maven
+      yum:
+        name: maven
+        state: present
+
     - name: Verify Java installation
       command: java -version
       register: java_version
@@ -36,3 +41,12 @@
     - name: Show installed Java version
       debug:
         msg: "{{ java_version.stdout }}"
+
+    - name: Verify Maven installation
+      command: mvn -version
+      register: maven_version
+      changed_when: false
+
+    - name: Show installed Maven version
+      debug:
+        msg: "{{ maven_version.stdout }}"
