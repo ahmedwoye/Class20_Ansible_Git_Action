@@ -17,3 +17,11 @@ jobs:
         run: 
           pwd
           ls -lstr
+          ansible --version
+
+
+      - name: Run Playbook
+        run: 
+          ansible-Playbook -i inventories/dev.ini playbook.yml
+          ls -lstr
+          ansible --version
