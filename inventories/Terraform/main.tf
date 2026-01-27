@@ -185,18 +185,6 @@ resource "aws_instance" "Java" {
 
 }
 
-resource "aws_instance" "Python" {
-  ami                    = var.ami_id
-  instance_type          = var.instance_type
-  subnet_id              = aws_subnet.public_2.id
-  vpc_security_group_ids = [aws_security_group.public_app.id]
-  key_name               = var.key_pair_name
-
-  tags = {
-    Name = "Python_Node"
-  }
-
-}
 
 
 
