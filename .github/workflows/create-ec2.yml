@@ -34,7 +34,7 @@ jobs:
           terraform_version: 1.7.5
 
       - name: Terraform Init (S3 Backend)
-        working-directory: terraform
+        working-directory: Terraform
         run: |
           terraform init \
             -backend-config="bucket=teachbleat-cicd-state-bucket" \
@@ -44,14 +44,14 @@ jobs:
             # -backend-config="dynamodb_table=terraform-locks"  # optional
 
       - name: Terraform Validate
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform plan
 
       - name: Terraform Apply
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform apply -auto-approve
          
