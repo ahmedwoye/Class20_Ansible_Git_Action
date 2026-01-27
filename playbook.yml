@@ -18,21 +18,21 @@
         state: started
 
 
-    - name: Java installation and Configuration
-      hosts: app
-      become: true
-      gather_facts: true
+- name: Java installation and Configuration
+  hosts: app
+  become: true
+  gather_facts: true
 
-      tasks:
-       - name: EC2 Java install
-         yum:
-          name: java-17-amazon-corretto
-          state: present
+  tasks:
+    - name: EC2 Java install
+      yum:
+        name: java-17-amazon-corretto
+        state: present
 
-       - name: Ensure Java is running
-         yum:
-          name: java-17-amazon-corretto
-          state: started
+    - name: Ensure Java is running
+      yum:
+        name: java-17-amazon-corretto
+        state: started
 
 
   
