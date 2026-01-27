@@ -20,7 +20,7 @@ jobs:
 
       - name: Create SSH key
         run: |
-          mkdir -p /tmp/key.pem
+          mkdir -p /tmp/
           echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/key.pem
           chmod 400 /tmp/key.pem
           ls -l /tmp/key.pem
