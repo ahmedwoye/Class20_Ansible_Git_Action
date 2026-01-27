@@ -18,10 +18,10 @@ jobs:
           pwd
           ls -lstr
           ansible --version
+          echo "{{secrets.EC2_SSH_PRIVATE_KEY}}"
 
 
       - name: Run Playbook
         run: 
           ansible-Playbook -i inventories/dev.ini playbook.yml
-          ls -lstr
-          ansible --version
+   
