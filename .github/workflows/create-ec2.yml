@@ -36,12 +36,8 @@ jobs:
       - name: Terraform Init (S3 Backend)
         working-directory: terraform
         run: |
-          terraform init \
-            -backend-config="bucket=teachbleat-cicd-state-bucket" \
-            -backend-config="key=envs/dev/terraform.tfstate" \
-            -backend-config="region=eu-west-1" \
-            -backend-config="encrypt=true"
-            # -backend-config="dynamodb_table=terraform-locks"  # optional
+          terraform init 
+            
 
       - name: Terraform Validate
         working-directory: terraform
