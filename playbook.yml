@@ -1,38 +1,36 @@
 ---
-- name: Nginx installation and Configuration
+- name: Nginx installation and configuration
   hosts: web
   become: true
   gather_facts: true
 
- 
-
   tasks:
-    - name: EC2 Nginx install
+    - name: Install Nginx
       yum:
         name: nginx
         state: present
 
-    - name: Ensure Nginx is running
-      yum:
+    - name: Ensure Nginx is running and enabled
+      service:
         name: nginx
         state: started
+        enabled: true
 
 
-- name: Java installation and Configuration
+- name: Java installation and configuration
   hosts: app
   become: true
   gather_facts: true
 
   tasks:
-    - name: EC2 Java install
+    - name: Install Java
       yum:
         name: java-17-amazon-corretto
         state: present
 
-    - name: Ensure Java is running
-      yum:
-        name: java-17-amazon-corretto
+    - name: Ensure Java service is running (if applicable)
+      service:
+        name: java
         state: started
-
-
-  
+        enabled: true
+      ignore_errors: true
