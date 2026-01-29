@@ -1,5 +1,5 @@
 ---
-- name: Nginx installation and configuration
+- name: Setup Web Servers (Nginx + frontend)
   hosts: web
   become: true
   gather_facts: true
@@ -10,14 +10,37 @@
         name: nginx
         state: present
 
-    - name: Ensure Nginx is running and enabled
-      service:
+    - name: Start and enable Nginx
+      systemd:
         name: nginx
         state: started
-        enabled: true
+        enabled: yes
 
+    - name: Ensure git is installed
+      yum:
+        name: git
+        state: present
 
-- name: Java and Maven installation and configuration
+    - name: Clone GroupAFruits-Veg-Market-One repo
+      git:
+        repo: 'https://github.com/ahmedwoye/GroupAFruits-Veg-Market-One.git'
+        dest: /home/ec2-user/GroupAFruits
+        version: main
+        force: yes
+        update: yes
+
+    - name: Replace Nginx default index.html with frontend index.html
+      copy:
+        src: /home/ec2-user/GroupAFruits/frontend/index.html
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+        backup: yes
+
+---
+
+- name: Setup App Servers (Java + Maven + repo)
   hosts: app
   become: true
   gather_facts: true
@@ -32,6 +55,19 @@
       yum:
         name: maven
         state: present
+
+    - name: Ensure git is installed
+      yum:
+        name: git
+        state: present
+
+    - name: Clone GroupAFruits-Veg-Market-One repo
+      git:
+        repo: 'https://github.com/ahmedwoye/GroupAFruits-Veg-Market-One.git'
+        dest: /home/ec2-user/GroupAFruits
+        version: main
+        force: yes
+        update: yes
 
     - name: Verify Java installation
       command: java -version
@@ -50,3 +86,11 @@
     - name: Show installed Maven version
       debug:
         msg: "{{ maven_version.stdout }}"
+    
+    - name: Clone GroupAFruits-Veg-Market-One repo
+      git:
+        repo: 'https://github.com/ahmedwoye/GroupAFruits-Veg-Market-One.git'
+        dest: /home/ec2-user/GroupAFruits
+        version: main
+        force: yes
+        update: yes
