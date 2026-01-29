@@ -37,6 +37,7 @@
         group: root
         mode: '0644'
         backup: yes
+        remote_src: yes
 
 
 - name: Setup App Servers (Java + Maven + repo)
