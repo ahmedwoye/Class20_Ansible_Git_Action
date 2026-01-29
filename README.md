@@ -15,3 +15,4 @@ Install Nginx (Java) on Node 2
 **(iii)** Use Git Actions pipeline to run the playbook
 
 ![screenshot of app](ArchitecturalDesign.png)
+![screenshot of app](Projecthtml.png)
